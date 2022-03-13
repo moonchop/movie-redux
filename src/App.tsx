@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Fetch from './components/Fetch';
-
-
 function App() {
   return (
     <div className="App">
-      <Fetch/>
+      안녕하세요
     </div>
   );
 }

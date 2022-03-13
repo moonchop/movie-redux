@@ -8,11 +8,7 @@ interface IMovieProps{
   summary:string;
   img : string;
 }
-interface IMovie{
-  id : number;
-  img : string;
-  name : string;
-  summary:string;
+interface IMovie extends IMovieProps{
 }
 function Movies({id,name,summary,img}:IMovieProps){
   return(
