@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import Fetch from './components/Fetch';
-import CounterContainer from './containers/CounterContainer';
+import CounterContainer from './redux-practice/containers/CounterContainer';
 function App() {
   return (
     <div className="App">
