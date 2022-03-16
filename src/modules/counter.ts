@@ -1,39 +1,38 @@
 //다른 모듈과 액션 이름이 중복되는 것을 방지.
-const SET_DIFF = 'counter/SET_DIFF';
-const INCREASE = 'counter/INCREASE';
-const DECREASE = 'counter/DECREASE';
 
+const INCREASE = 'counter/INCREASE' as const;
+const DECREASE = 'counter/DECREASE' as const;
+const INCREASE_BY = 'counter/INCREASE_BY' as const;
 //액션 생성함수
-export const setDiff  = (diff:number) =>({type:SET_DIFF, diff});
-export const increase = () => ({type:INCREASE});
-export const decrease = () => ({type:DECREASE});
+export const increase = () => ({ type: INCREASE });
+export const decrease = () => ({ type: DECREASE });
+export const increaseBy = (diff: number) => ({
+  type: INCREASE_BY,
+  payload: diff
+});
 
 //초기 상태 선언
-const initialState = {
-    number:0,
-    diff:1
+type CounterAction =
+  | ReturnType<typeof increase>
+  | ReturnType<typeof decrease>
+  | ReturnType<typeof increaseBy>;
+type CounterState = {
+  count: number;
 };
-interface IAction{
-    type:string;
-    diff?:number;
-}
+
+const initialState: CounterState = {
+  count: 0,
+};
 //리듀서
-export default function counter(state=initialState,action:IAction){
-    switch(action.type){
-        case SET_DIFF:
-            return{
-                ...state,
-                diff:action.diff
-            };
-        case INCREASE:
-            return{
-                ...state,
-                number:state.number + state.diff
-            };
-        case DECREASE:
-            return{
-                ...state,
-                number:state.number - state.diff
-            }
-    }
+export default function counter(state:CounterState = initialState, action: CounterAction) {
+  switch (action.type) {
+    case INCREASE:
+      return { count: state.count + 1 };
+    case DECREASE:
+      return { count: state.count - 1 };
+    case INCREASE_BY:
+      return { count: state.count + action.payload };
+    default:
+      return state;
+  }
 }
